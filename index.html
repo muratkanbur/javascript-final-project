@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/style.css" />
+    <link rel="stylesheet" href="./css/md.css" media="(min-width: 768px)" />
+    <link rel="stylesheet" href="./css/lg.css" media="(min-width: 1024px)" />
+    <title>Calorie Calculation App</title>
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="profile-info gap-md">
+        <img
+          id="user-avatar"
+          src="./assets/images/user-avatar-profile-icon.svg"
+          alt="profile picture"
+        />
+
+        <div class="user-welcome">
+          <h1 class="welcome-title text-xl font-bold">
+            Hello! <span id="userName">User</span> &#128075;
+          </h1>
+          <p class="welcome-subtitle text-xs">
+            Today is a great day for your health
+          </p>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-container gap-lg">
+      <section class="card p-lg water-card">
+        <h2 class="text-lg font-bold mb-md">Water Tracking &#128167;</h2>
+        <!-- Target and Water Intake -->
+        <p class="water-info p-sm mb-md">
+          <span class="text-sm font-semibold"
+            >Target: <span id="waterTarget">2.5</span> L</span
+          >
+          <span class="text-sm font-semibold"
+            >Consumed: <span id="waterConsumed">0</span> L</span
+          >
+        </p>
+        <!-- Water Addition & Reset Buttons -->
+        <div class="water-controls gap-sm mb-sm" id="waterControls">
+          <button
+            class="btn-water gap-2xs p-sm text-sm font-semibold"
+            data-amount="0.25"
+          >
+            <svg
+              class="glass-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M15.2 22H8.8a2 2 0 0 1-2-1.79L5 3h14l-1.8 17.21A2 2 0 0 1 15.2 22z"
+              ></path>
+              <path d="M6 6h12"></path>
+            </svg>
+            +250 ml
+          </button>
+
+          <button
+            class="btn-water gap-2xs p-sm text-sm font-semibold"
+            data-amount="0.50"
+          >
+            <svg
+              class="glass-icon"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path
+                d="M15.2 22H8.8a2 2 0 0 1-2-1.79L5 3h14l-1.8 17.21A2 2 0 0 1 15.2 22z"
+              ></path>
+              <path d="M6 6h12"></path>
+              <path d="M7 11h10"></path>
+            </svg>
+            +500 ml
+          </button>
+
+          <button
+            id="btnResetWater"
+            class="btn-reset gap-2xs p-sm text-sm font-semibold"
+          >
+            Reset
+          </button>
+        </div>
+        <!-- Motivational or Warning Message -->
+        <p class="water-message text-xs font-medium" id="waterMessage"></p>
+      </section>
+
+      <section class="card p-lg calorie-card">
+        <h2 class="text-lg font-bold mb-md">Daily Calorie Summary</h2>
+        <!-- Numerical Values -->
+        <div class="calorie-stats p-md mb-lg">
+          <div class="stat-item">
+            <span class="text-xs font-medium">Goal</span>
+            <p class="text-lg font-bold">
+              <span id="targetCalorie">0</span>
+              <small class="text-xs">kcal</small>
+            </p>
+          </div>
+          <div class="stat-item main-stat">
+            <span class="text-xs font-semibold">Remaining</span>
+            <p class="remaining-val text-2xl font-bold">
+              <span id="remainingCalorie">0</span>
+              <small class="text-xs">kcal</small>
+            </p>
+          </div>
+          <div class="stat-item">
+            <span class="text-xs font-medium">Consumed</span>
+            <p class="text-lg font-bold">
+              <span id="consumedCalorie">0</span>
+              <small class="text-xs">kcal</small>
+            </p>
+          </div>
+        </div>
+        <!-- Macro Progress Bars -->
+        <div class="macro-container">
+          <h3 class="text-sm font-semibold mb-sm">Macro Distribution</h3>
+
+          <div class="macro-item mb-sm">
+            <div class="macro-header mb-xs">
+              <span class="text-xs font-semibold">Protein</span>
+              <small class="text-xs font-medium"
+                ><span id="proteinVal">0</span> g</small
+              >
+            </div>
+            <div class="progress-bar">
+              <div id="proteinBar" class="progress fill-protein"></div>
+            </div>
+          </div>
+
+          <div class="macro-item mb-sm">
+            <div class="macro-header mb-xs">
+              <span class="text-xs font-semibold">Carbs</span>
+              <small class="text-xs font-medium"
+                ><span id="carbVal">0</span> g</small
+              >
+            </div>
+            <div class="progress-bar">
+              <div id="carbBar" class="progress fill-carb"></div>
+            </div>
+          </div>
+
+          <div class="macro-item">
+            <div class="macro-header mb-xs">
+              <span class="text-xs font-semibold">Fat</span>
+              <small class="text-xs font-medium"
+                ><span id="fatVal">0</span> g</small
+              >
+            </div>
+            <div class="progress-bar">
+              <div id="fatBar" class="progress fill-fat"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card meal-card">
+        <h2>Meal Tracking &#127869;</h2>
+
+        <div class="meals-container">
+          <!-- Breakfast -->
+          <div class="meal-group">
+            <div class="meal-header">
+              <h3>Breakfast</h3>
+              <button class="btn-add-meal" data-meal="breakfast">+</button>
+            </div>
+            <ul id="breakfastList" class="meal-list"></ul>
+          </div>
+
+          <!-- Lunch -->
+          <div class="meal-group">
+            <div class="meal-header">
+              <h3>Lunch</h3>
+              <button class="btn-add-meal" data-meal="lunch">+</button>
+            </div>
+            <ul id="lunchList" class="meal-list"></ul>
+          </div>
+
+          <!-- Dinner -->
+          <div class="meal-group">
+            <div class="meal-header">
+              <h3>Dinner</h3>
+              <button class="btn-add-meal" data-meal="dinner">+</button>
+            </div>
+            <ul id="dinnerList" class="meal-list"></ul>
+          </div>
+          <!-- Snacks -->
+          <div class="meal-group">
+            <div class="meal-header">
+              <h3>Snacks</h3>
+              <button class="btn-add-meal" data-meal="snacks">+</button>
+            </div>
+            <ul id="snacksList" class="meal-list"></ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

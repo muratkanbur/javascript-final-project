@@ -1,0 +1,270 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--card-bg);
+  line-height: 1.5;
+  padding: 20px;
+}
+
+:root {
+  --bg-color: #1a353f;
+  --card-bg: #f4f1ea;
+  --text-color: #1a353f;
+  --text-muted: #647b85;
+  --border-color: #e0dcd3;
+
+  --primary-color: #d3522b;
+  --primary-hover: #b5411d;
+
+  /* Food & Water Metric Colors */
+  --water-color: #83aab0;
+  --water-bg: #e2eced;
+  --protein-color: #d3522b;
+  --carb-color: #d99a26;
+  --fat-color: #3b6058;
+
+  /* Radius & Shadows */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.15);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+/* Font Size Classes */
+.text-xs {
+  font-size: 12px;
+}
+.text-sm {
+  font-size: 14px;
+}
+.text-base {
+  font-size: 16px;
+}
+.text-lg {
+  font-size: 18px;
+}
+.text-xl {
+  font-size: 20px;
+}
+.text-2xl {
+  font-size: 24px;
+}
+
+/* Thickness Classes */
+.font-normal {
+  font-weight: 400;
+}
+.font-medium {
+  font-weight: 500;
+}
+.font-semibold {
+  font-weight: 600;
+}
+.font-bold {
+  font-weight: 700;
+}
+
+/* Gap Classes */
+
+.gap-2xs {
+  gap: 6px;
+}
+.gap-xs {
+  gap: 8px;
+}
+.gap-sm {
+  gap: 12px;
+}
+.gap-md {
+  gap: 16px;
+}
+.gap-lg {
+  gap: 24px;
+}
+.gap-xl {
+  gap: 32px;
+}
+
+/* Padding Classes */
+.p-sm {
+  padding: 12px;
+}
+.p-md {
+  padding: 16px;
+}
+.p-lg {
+  padding: 20px;
+}
+
+/* Margin Bottom Classes */
+.mb-xs {
+  margin-bottom: 8px;
+}
+.mb-sm {
+  margin-bottom: 12px;
+}
+.mb-md {
+  margin-bottom: 16px;
+}
+.mb-lg {
+  margin-bottom: 24px;
+}
+
+
+
+.app-header {
+  margin-bottom: 24px;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+}
+
+#user-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 2px solid var(--card-bg);
+  background-color: var(--card-bg);
+  object-fit: cover;
+}
+
+.welcome-title {
+  color: var(--card-bg);
+}
+
+.welcome-subtitle {
+  color: var(--water-color);
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+}
+
+.water-info {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--water-bg);
+  color: var(--fat-color);
+  border-radius: var(--radius-sm);
+}
+
+.water-controls {
+  display: flex;
+}
+
+.btn-water,
+.btn-reset {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
+}
+
+.btn-water {
+  background-color: var(--water-color);
+  color: #ffffff;
+}
+
+.glass-icon {
+  width: 18px;
+  height: 18px;
+  transition: transform 0.2s ease;
+}
+
+.btn-water:hover {
+  opacity: 0.9;
+}
+
+.btn-water:hover .glass-icon {
+  transform: translateY(-2px);
+}
+
+.btn-water:active,
+.btn-reset:active {
+  transform: scale(0.98);
+}
+
+.btn-reset {
+  background-color: var(--primary-color);
+  color: #ffffff;
+}
+
+.btn-reset:hover {
+  background-color: var(--primary-hover);
+}
+
+.water-message {
+  text-align: center;
+  color: var(--text-muted);
+  font-style: italic;
+  min-height: 18px;
+}
+
+
+.calorie-stats {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: var(--water-bg);
+  border-radius: var(--radius-md);
+  text-align: center;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.remaining-val {
+  color: var(--primary-color);
+}
+
+.macro-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: var(--border-color);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  width: 0%;
+  border-radius: var(--radius-sm);
+  transition: width 0.4s ease-in-out;
+}
+
+.fill-protein { background-color: var(--protein-color); }
+.fill-carb    { background-color: var(--carb-color); }
+.fill-fat     { background-color: var(--fat-color); }
