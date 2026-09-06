@@ -1,0 +1,66 @@
+
+/*    DESKTOP LAYOUT (min-width: 1024px) */
+
+.main-container {
+  max-width: 100%;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  align-items: stretch;
+}
+
+
+.meal-card {
+  grid-column: span 1;
+}
+
+
+.card {
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.card h2 {
+  font-size: 24px;
+}
+
+.card h3 {
+  font-size: 18px;
+}
+
+
+.water-info {
+  padding: 20px;
+  font-size: 16px;
+}
+
+.btn-water,
+.btn-reset {
+  padding: 24px 16px;
+  min-height: 120px;
+  font-size: 16px;
+}
+
+.glass-icon {
+  width: 64px;
+  height: 64px;
+}
+
+
+.stat-item p {
+  font-size: 22px;
+}
+
+.remaining-val {
+  font-size: 32px;
+}
+
+
+.btn-add-meal {
+  width: 36px;
+  height: 36px;
+  font-size: 18px;
+}
