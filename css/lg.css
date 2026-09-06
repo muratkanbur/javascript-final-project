@@ -64,3 +64,15 @@
   height: 36px;
   font-size: 18px;
 }
+
+.water-circle-chart,
+.calorie-donut-chart {
+  width: 180px;
+  height: 180px;
+}
+
+.water-circle-inner,
+.calorie-donut-inner {
+  width: 145px;
+  height: 145px;
+}

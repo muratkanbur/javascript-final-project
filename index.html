@@ -32,14 +32,18 @@
       <section class="card p-lg water-card">
         <h2 class="text-lg font-bold mb-md">Water Tracking &#128167;</h2>
         <!-- Target and Water Intake -->
-        <p class="water-info p-sm mb-md">
-          <span class="text-sm font-semibold"
-            >Target: <span id="waterTarget">2.5</span> L</span
-          >
-          <span class="text-sm font-semibold"
-            >Consumed: <span id="waterConsumed">0</span> L</span
-          >
-        </p>
+        <div class="water-chart-container mb-md">
+          <div class="water-circle-chart" id="waterCircleChart">
+            <div class="water-circle-inner">
+              <p class="text-xs font-medium">
+                Target: <span id="waterTarget">2.5</span> L
+              </p>
+              <p class="text-sm font-bold">
+                Consumed: <span id="waterConsumed">0</span> L
+              </p>
+            </div>
+          </div>
+        </div>
         <!-- Water Addition & Reset Buttons -->
         <div class="water-controls gap-sm mb-sm" id="waterControls">
           <button
@@ -98,28 +102,32 @@
 
       <section class="card p-lg calorie-card">
         <h2 class="text-lg font-bold mb-md">Daily Calorie Summary</h2>
-        <!-- Numerical Values -->
-        <div class="calorie-stats p-md mb-lg">
-          <div class="stat-item">
+        <div class="calorie-top-info mb-md">
+          <div class="stat-simple">
             <span class="text-xs font-medium">Goal</span>
-            <p class="text-lg font-bold">
-              <span id="targetCalorie">0</span>
+            <p class="text-base font-bold">
+              <span id="targetCalorie">2100</span>
               <small class="text-xs">kcal</small>
             </p>
           </div>
-          <div class="stat-item main-stat">
-            <span class="text-xs font-semibold">Remaining</span>
-            <p class="remaining-val text-2xl font-bold">
-              <span id="remainingCalorie">0</span>
-              <small class="text-xs">kcal</small>
-            </p>
-          </div>
-          <div class="stat-item">
+          <div class="stat-simple">
             <span class="text-xs font-medium">Consumed</span>
-            <p class="text-lg font-bold">
+            <p class="text-base font-bold">
               <span id="consumedCalorie">0</span>
               <small class="text-xs">kcal</small>
             </p>
+          </div>
+        </div>
+
+        <div class="calorie-chart-container mb-lg">
+          <div class="calorie-donut-chart" id="calorieDonutChart">
+            <div class="calorie-donut-inner">
+              <span class="text-xs font-semibold">Remaining</span>
+              <p class="remaining-val text-2xl font-bold">
+                <span id="remainingCalorie">2100</span>
+              </p>
+              <small class="text-xs font-medium">kcal</small>
+            </div>
           </div>
         </div>
         <!-- Macro Progress Bars -->
@@ -172,7 +180,12 @@
           <div class="meal-group mb-xs">
             <div class="meal-header mb-xs">
               <h3 class="text-sm font-semibold">Breakfast</h3>
-              <button class="btn-add-meal text-sm font-bold" data-meal="breakfast">+</button>
+              <button
+                class="btn-add-meal text-sm font-bold"
+                data-meal="breakfast"
+              >
+                +
+              </button>
             </div>
             <ul id="breakfastList" class="meal-list"></ul>
           </div>
@@ -181,7 +194,9 @@
           <div class="meal-group mb-xs">
             <div class="meal-header mb-xs">
               <h3 class="text-sm font-semibold">Lunch</h3>
-              <button class="btn-add-meal text-sm font-bold" data-meal="lunch">+</button>
+              <button class="btn-add-meal text-sm font-bold" data-meal="lunch">
+                +
+              </button>
             </div>
             <ul id="lunchList" class="meal-list"></ul>
           </div>
@@ -190,7 +205,9 @@
           <div class="meal-group mb-xs">
             <div class="meal-header mb-xs">
               <h3 class="text-sm font-semibold">Dinner</h3>
-              <button class="btn-add-meal text-sm font-bold" data-meal="dinner">+</button>
+              <button class="btn-add-meal text-sm font-bold" data-meal="dinner">
+                +
+              </button>
             </div>
             <ul id="dinnerList" class="meal-list"></ul>
           </div>
@@ -198,7 +215,9 @@
           <div class="meal-group">
             <div class="meal-header mb-xs">
               <h3 class="text-sm font-semibold">Snacks</h3>
-              <button class="btn-add-meal text-sm font-bold" data-meal="snacks">+</button>
+              <button class="btn-add-meal text-sm font-bold" data-meal="snacks">
+                +
+              </button>
             </div>
             <ul id="snacksList" class="meal-list"></ul>
           </div>

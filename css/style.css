@@ -117,8 +117,6 @@ body {
   margin-bottom: 24px;
 }
 
-
-
 .app-header {
   margin-bottom: 24px;
 }
@@ -225,7 +223,6 @@ body {
   min-height: 18px;
 }
 
-
 .calorie-stats {
   display: flex;
   justify-content: space-around;
@@ -265,9 +262,15 @@ body {
   transition: width 0.4s ease-in-out;
 }
 
-.fill-protein { background-color: var(--protein-color); }
-.fill-carb    { background-color: var(--carb-color); }
-.fill-fat     { background-color: var(--fat-color); }
+.fill-protein {
+  background-color: var(--protein-color);
+}
+.fill-carb {
+  background-color: var(--carb-color);
+}
+.fill-fat {
+  background-color: var(--fat-color);
+}
 
 .meals-container {
   display: flex;
@@ -293,7 +296,9 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.1s ease;
+  transition:
+    background-color 0.2s ease,
+    transform 0.1s ease;
 }
 
 .btn-add-meal:hover {
@@ -307,3 +312,66 @@ body {
 .meal-list {
   list-style: none;
 }
+
+/*  CIRCULAR PROGRESS & DONUT CHART STYLES */
+
+.water-chart-container,
+.calorie-chart-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.water-circle-chart {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: conic-gradient(var(--primary-color) 0deg, #e5e7eb 0deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.3s ease;
+}
+
+.water-circle-inner {
+  width: 130px;
+  height: 130px;
+  background-color: var(--card-bg);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.calorie-top-info {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+}
+
+.calorie-donut-chart {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background: conic-gradient(var(--primary-color) 0deg, #e5e7eb 0deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.3s ease;
+}
+
+.calorie-donut-inner {
+  width: 135px;
+  height: 135px;
+  background-color: var(--card-bg);
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
