@@ -268,3 +268,42 @@ body {
 .fill-protein { background-color: var(--protein-color); }
 .fill-carb    { background-color: var(--carb-color); }
 .fill-fat     { background-color: var(--fat-color); }
+
+.meals-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.meal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 6px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.btn-add-meal {
+  width: 28px;
+  height: 28px;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-add-meal:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-add-meal:active {
+  transform: scale(0.92);
+}
+
+.meal-list {
+  list-style: none;
+}
