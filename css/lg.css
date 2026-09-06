@@ -31,12 +31,6 @@
   font-size: 18px;
 }
 
-
-.water-info {
-  padding: 20px;
-  font-size: 16px;
-}
-
 .btn-water,
 .btn-reset {
   padding: 24px 16px;
@@ -47,11 +41,6 @@
 .glass-icon {
   width: 64px;
   height: 64px;
-}
-
-
-.stat-item p {
-  font-size: 22px;
 }
 
 .remaining-val {
@@ -65,14 +54,8 @@
   font-size: 18px;
 }
 
-.water-circle-chart,
-.calorie-donut-chart {
+
+.progress-ring {
   width: 180px;
   height: 180px;
-}
-
-.water-circle-inner,
-.calorie-donut-inner {
-  width: 145px;
-  height: 145px;
 }

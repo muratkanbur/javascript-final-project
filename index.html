@@ -33,7 +33,22 @@
         <h2 class="text-lg font-bold mb-md">Water Tracking &#128167;</h2>
         <!-- Target and Water Intake -->
         <div class="water-chart-container mb-md">
-          <div class="water-circle-chart" id="waterCircleChart">
+          <div class="circular-progress">
+            <svg
+              class="progress-ring"
+              viewBox="0 0 160 160"
+              width="160"
+              height="160"
+            >
+              <circle class="progress-ring-bg" cx="80" cy="80" r="70" />
+              <circle
+                class="progress-ring-circle"
+                id="waterProgressRing"
+                cx="80"
+                cy="80"
+                r="70"
+              />
+            </svg>
             <div class="water-circle-inner">
               <p class="text-xs font-medium">
                 Target: <span id="waterTarget">2.5</span> L
@@ -49,6 +64,7 @@
           <button
             class="btn-water gap-2xs p-sm text-sm font-semibold"
             data-amount="0.25"
+            aria-label="Add 250 ml water"
           >
             <svg
               class="glass-icon"
@@ -58,6 +74,7 @@
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
+              aria-hidden="true"
             >
               <path
                 d="M15.2 22H8.8a2 2 0 0 1-2-1.79L5 3h14l-1.8 17.21A2 2 0 0 1 15.2 22z"
@@ -70,6 +87,7 @@
           <button
             class="btn-water gap-2xs p-sm text-sm font-semibold"
             data-amount="0.50"
+            aria-label="Add 500 ml water"
           >
             <svg
               class="glass-icon"
@@ -79,6 +97,7 @@
               stroke-width="2"
               stroke-linecap="round"
               stroke-linejoin="round"
+              aria-hidden="true"
             >
               <path
                 d="M15.2 22H8.8a2 2 0 0 1-2-1.79L5 3h14l-1.8 17.21A2 2 0 0 1 15.2 22z"
@@ -92,6 +111,7 @@
           <button
             id="btnResetWater"
             class="btn-reset gap-2xs p-sm text-sm font-semibold"
+            aria-label="Reset water intake"
           >
             Reset
           </button>
@@ -120,7 +140,22 @@
         </div>
 
         <div class="calorie-chart-container mb-lg">
-          <div class="calorie-donut-chart" id="calorieDonutChart">
+          <div class="circular-progress">
+            <svg
+              class="progress-ring"
+              viewBox="0 0 170 170"
+              width="170"
+              height="170"
+            >
+              <circle class="progress-ring-bg" cx="85" cy="85" r="75" />
+              <circle
+                class="progress-ring-circle"
+                id="calorieProgressRing"
+                cx="85"
+                cy="85"
+                r="75"
+              />
+            </svg>
             <div class="calorie-donut-inner">
               <span class="text-xs font-semibold">Remaining</span>
               <p class="remaining-val text-2xl font-bold">
@@ -183,6 +218,7 @@
               <button
                 class="btn-add-meal text-sm font-bold"
                 data-meal="breakfast"
+                aria-label="Add meal to Breakfast"
               >
                 +
               </button>
@@ -194,7 +230,11 @@
           <div class="meal-group mb-xs">
             <div class="meal-header mb-xs">
               <h3 class="text-sm font-semibold">Lunch</h3>
-              <button class="btn-add-meal text-sm font-bold" data-meal="lunch">
+              <button
+                class="btn-add-meal text-sm font-bold"
+                data-meal="lunch"
+                aria-label="Add meal to Lunch"
+              >
                 +
               </button>
             </div>
@@ -205,7 +245,11 @@
           <div class="meal-group mb-xs">
             <div class="meal-header mb-xs">
               <h3 class="text-sm font-semibold">Dinner</h3>
-              <button class="btn-add-meal text-sm font-bold" data-meal="dinner">
+              <button
+                class="btn-add-meal text-sm font-bold"
+                data-meal="dinner"
+                aria-label="Add meal to Dinner"
+              >
                 +
               </button>
             </div>
@@ -215,7 +259,11 @@
           <div class="meal-group">
             <div class="meal-header mb-xs">
               <h3 class="text-sm font-semibold">Snacks</h3>
-              <button class="btn-add-meal text-sm font-bold" data-meal="snacks">
+              <button
+                class="btn-add-meal text-sm font-bold"
+                data-meal="snacks"
+                aria-label="Add meal to Snacks"
+              >
                 +
               </button>
             </div>

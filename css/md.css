@@ -15,12 +15,6 @@
   justify-content: space-between;
 }
 
-.water-info {
-  padding: 16px;
-  text-align: center;
-  align-items: center;
-}
-
 .water-controls {
   display: flex;
   justify-content: space-between;

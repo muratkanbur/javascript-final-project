@@ -29,6 +29,10 @@ body {
   --carb-color: #d99a26;
   --fat-color: #3b6058;
 
+  /* Chart & UI Elements */
+  --chart-bg: #e5e7eb;
+  --white: #ffffff;
+
   /* Radius & Shadows */
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -157,13 +161,6 @@ body {
   box-shadow: var(--shadow-md);
 }
 
-.water-info {
-  display: flex;
-  justify-content: space-between;
-  background-color: var(--water-bg);
-  color: var(--fat-color);
-  border-radius: var(--radius-sm);
-}
 
 .water-controls {
   display: flex;
@@ -185,7 +182,7 @@ body {
 
 .btn-water {
   background-color: var(--water-color);
-  color: #ffffff;
+  color: var(--white);
 }
 
 .glass-icon {
@@ -209,7 +206,7 @@ body {
 
 .btn-reset {
   background-color: var(--primary-color);
-  color: #ffffff;
+  color: var(--white);
 }
 
 .btn-reset:hover {
@@ -221,20 +218,6 @@ body {
   color: var(--text-muted);
   font-style: italic;
   min-height: 18px;
-}
-
-.calorie-stats {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  background-color: var(--water-bg);
-  border-radius: var(--radius-md);
-  text-align: center;
-}
-
-.stat-item {
-  display: flex;
-  flex-direction: column;
 }
 
 .remaining-val {
@@ -291,7 +274,7 @@ body {
   border: none;
   border-radius: 50%;
   background-color: var(--primary-color);
-  color: #ffffff;
+  color: var(--white);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -313,7 +296,6 @@ body {
   list-style: none;
 }
 
-/*  CIRCULAR PROGRESS & DONUT CHART STYLES */
 
 .water-chart-container,
 .calorie-chart-container {
@@ -323,16 +305,51 @@ body {
   width: 100%;
 }
 
-.water-circle-chart {
-  width: 160px;
-  height: 160px;
-  border-radius: 50%;
-  background: conic-gradient(var(--primary-color) 0deg, #e5e7eb 0deg);
+.circular-progress {
+  position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background 0.3s ease;
 }
+
+.progress-ring {
+  transform: rotate(-90deg); 
+}
+
+.progress-ring-bg {
+  fill: none;
+  stroke: var(--chart-bg);
+  stroke-width: 12;
+}
+
+.progress-ring-circle {
+  fill: none;
+  stroke-width: 12;
+  stroke-linecap: round; 
+  transition: stroke-dashoffset 0.5s ease-in-out;
+}
+
+
+#waterProgressRing {
+  stroke: var(--water-color);
+}
+
+#calorieProgressRing {
+  stroke: var(--primary-color);
+}
+
+
+.water-circle-inner,
+.calorie-donut-inner {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  border-radius: 50%;
+}
+
 
 .water-circle-inner {
   width: 130px;
@@ -352,16 +369,7 @@ body {
   text-align: center;
 }
 
-.calorie-donut-chart {
-  width: 170px;
-  height: 170px;
-  border-radius: 50%;
-  background: conic-gradient(var(--primary-color) 0deg, #e5e7eb 0deg);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: background 0.3s ease;
-}
+
 
 .calorie-donut-inner {
   width: 135px;
