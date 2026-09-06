@@ -1,0 +1,44 @@
+/* TABLET LAYOUT (min-width: 768px) */
+
+.main-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.meal-card {
+  grid-column: span 2;
+}
+
+.water-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.water-info {
+  padding: 16px;
+  text-align: center;
+  align-items: center;
+}
+
+.water-controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.btn-water,
+.btn-reset {
+  flex: 1;
+  flex-direction: column;
+  padding: 16px 8px;
+  min-height: 90px;
+  border-radius: var(--radius-md);
+  gap: 8px;
+}
+
+.glass-icon {
+  width: 58px;
+  height: 58px;
+}
