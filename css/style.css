@@ -161,7 +161,6 @@ body {
   box-shadow: var(--shadow-md);
 }
 
-
 .water-controls {
   display: flex;
 }
@@ -296,7 +295,6 @@ body {
   list-style: none;
 }
 
-
 .water-chart-container,
 .calorie-chart-container {
   display: flex;
@@ -313,7 +311,7 @@ body {
 }
 
 .progress-ring {
-  transform: rotate(-90deg); 
+  transform: rotate(-90deg);
 }
 
 .progress-ring-bg {
@@ -325,10 +323,9 @@ body {
 .progress-ring-circle {
   fill: none;
   stroke-width: 12;
-  stroke-linecap: round; 
+  stroke-linecap: round;
   transition: stroke-dashoffset 0.5s ease-in-out;
 }
-
 
 #waterProgressRing {
   stroke: var(--water-color);
@@ -337,7 +334,6 @@ body {
 #calorieProgressRing {
   stroke: var(--primary-color);
 }
-
 
 .water-circle-inner,
 .calorie-donut-inner {
@@ -349,7 +345,6 @@ body {
   text-align: center;
   border-radius: 50%;
 }
-
 
 .water-circle-inner {
   width: 130px;
@@ -369,8 +364,6 @@ body {
   text-align: center;
 }
 
-
-
 .calorie-donut-inner {
   width: 135px;
   height: 135px;
@@ -383,3 +376,129 @@ body {
   text-align: center;
 }
 
+/* Search Modal Styles */
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(26, 53, 63, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.modal-content {
+  background-color: var(--card-bg);
+  color: var(--text-color);
+  width: 90%;
+  max-width: 480px;
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  box-shadow: var(--shadow-md);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal-header h3 {
+  color: var(--text-color);
+  font-size: 1.1rem;
+}
+
+.btn-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-muted);
+  line-height: 1;
+  transition: color 0.2s ease;
+}
+
+.btn-close:hover {
+  color: var(--primary-color);
+}
+
+#foodSearchInput {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background-color: var(--white);
+  color: var(--text-color);
+  font-size: 14px;
+  outline: none;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
+}
+
+#foodSearchInput:focus {
+  border-color: var(--water-color);
+}
+
+.search-results-list {
+  max-height: 280px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.search-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--white);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.search-item:hover {
+  background-color: var(--water-bg);
+}
+
+.meal-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed var(--border-color);
+  padding: 6px 0;
+}
+
+.meal-item-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-delete-food {
+  background: none;
+  border: none;
+  color: #ef4444;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.btn-delete-food:hover {
+  opacity: 0.7;
+}

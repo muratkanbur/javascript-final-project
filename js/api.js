@@ -1,9 +1,21 @@
+// js/api.js
+
+const USDA_API_KEY = "DEMO_KEY";
+
 async function searchFood(query) {
   if (!query || query.trim().length < 2) return [];
 
-  const url = `https://world.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(
-    query,
-  )}&search_simple=1&action=process&json=1&page_size=10`;
+  const cleanQuery = query.toLowerCase().trim();
+
+  const matchedSnacks = COMMON_SNACKS.filter((snack) =>
+    snack.name.toLowerCase().includes(cleanQuery),
+  );
+
+  // USDA FoodData Central Search Endpoint
+  // dataType: Foundation ve SR Legacy
+  const url = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${USDA_API_KEY}&query=${encodeURIComponent(
+    cleanQuery,
+  )}&dataType=Foundation,SR%20Legacy&pageSize=15`;
 
   try {
     const response = await fetch(url);
@@ -13,23 +25,35 @@ async function searchFood(query) {
     }
 
     const data = await response.json();
-    const rawProducts = data.products || [];
+    const rawFoods = data.foods || [];
 
-    const cleanProducts = rawProducts.map((product) => {
-      const nutriments = product.nutriments || {};
+    const cleanProducts = rawFoods.map((food) => {
+      const nutrients = food.foodNutrients || [];
+
+      // USDA Nutrients ID Mapping:
+      // 1008 -> Energy (kcal)
+      // 1003 -> Protein (g)
+      // 1005 -> Carbohydrate (g)
+      // 1004 -> Total lipid/fat (g)
+
+      const getNutrientVal = (id) => {
+        const item = nutrients.find((n) => n.nutrientId === id);
+        return item ? Math.round(item.value) : 0;
+      };
 
       return {
-        id: product._id || Math.random().toString(),
-        name: product.product_name_en || product.product_name || "Unknown Food",
-        calories: Math.round(nutriments["energy-kcal_100g"] || nutriments["energy-kcal"] || 0),
-        protein: Math.round(nutriments.proteins_100g || 0),
-        carbs: Math.round(nutriments.carbohydrates_100g || 0),
-        fat: Math.round(nutriments.fat_100g || 0),
+        id: food.fdcId.toString(),
+        name: food.description,
+        calories: getNutrientVal(1008),
+        protein: getNutrientVal(1003),
+        carbs: getNutrientVal(1005),
+        fat: getNutrientVal(1004),
       };
     });
-    return cleanProducts;
+
+    return [...matchedSnacks, ...cleanProducts];
   } catch (error) {
-    console.error("Error fetching food data:", error);
-    return [];
+    console.error("Error fetching data from USDA API:", error);
+    return matchedSnacks;
   }
 }
