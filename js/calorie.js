@@ -72,6 +72,7 @@ function addFoodToMeal(foodId) {
 
   appState.meals[activeMealType].push(selectedFood);
   renderMealList(activeMealType);
+  updateSummary();
   closeModal();
 }
 
@@ -139,6 +140,7 @@ searchResults.addEventListener("click", (e) => {
 function deleteFoodFromMeal(mealType, index) {
   appState.meals[mealType].splice(index, 1);
   renderMealList(mealType);
+  updateSummary();
 }
 
 document.addEventListener("click", (e) => {

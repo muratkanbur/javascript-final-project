@@ -1,6 +1,6 @@
-// js/api.js
 
-const USDA_API_KEY = "DEMO_KEY";
+
+const USDA_API_KEY = "cjWDeC4ZmU85Vu4E1OExA0qK24wApzaLa52ySa16";
 
 async function searchFood(query) {
   if (!query || query.trim().length < 2) return [];
