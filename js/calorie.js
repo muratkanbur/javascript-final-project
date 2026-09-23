@@ -1,8 +1,12 @@
+import { COMMON_SNACKS } from "./snacksDatabase.js";
+import { searchFood } from "./api.js";
+import { updateSummary } from "./summary.js";
+import { updateWaterUI } from "./water.js";
+
 let searchTimeout = null;
 let activeMealType = null;
 
-
-let appState = {
+export const appState = {
   meals: {
     breakfast: [],
     lunch: [],
@@ -18,9 +22,10 @@ const btnCloseModal = document.getElementById("btnCloseModal");
 const foodSearchInput = document.getElementById("foodSearchInput");
 const searchResults = document.getElementById("searchResults");
 const btnAddMeals = document.querySelectorAll(".btn-add-meal");
-
+let lastFocusedElement;
 
 function openModal(mealType) {
+  lastFocusedElement = document.activeElement;
   activeMealType = mealType;
   searchModal.classList.remove("hidden");
   const formattedMeal = mealType.charAt(0).toUpperCase() + mealType.slice(1);
@@ -33,32 +38,47 @@ function closeModal() {
   foodSearchInput.value = "";
   searchResults.innerHTML = "";
   activeMealType = null;
+  if (lastFocusedElement) lastFocusedElement.focus();
 }
 
 function renderSearchResults(results) {
   appState.currentSearchResults = results;
+  searchResults.innerHTML = "";
 
   if (results.length === 0) {
-    searchResults.innerHTML = `<p class="text-xs text-muted p-sm">No food found.</p>`;
+    const noResultText = document.createElement("p");
+    noResultText.className = "text-xs text-muted p-sm";
+    noResultText.textContent = "No food found.";
+    searchResults.appendChild(noResultText);
     return;
   }
 
-  const html = results
-    .map(
-      (food) => `
-    <div class="search-item p-sm mb-xs" data-id="${food.id}">
-        <div class="food-info">
-          <strong class="text-sm">${food.name}</strong>
-          <span class="text-xs text-muted">${food.calories} kcal / 100g</span>
-        </div>
-        <div class="food-macros text-xs text-muted">
-          P: ${food.protein}g | C: ${food.carbs}g | F: ${food.fat}g
-        </div>
-      </div>
-    `,
-    )
-    .join("");
-  searchResults.innerHTML = html;
+  results.forEach((food) => {
+    const itemDiv = document.createElement("div");
+    itemDiv.className = "search-item p-sm mb-xs";
+    itemDiv.setAttribute("data-id", food.id);
+
+    const foodInfo = document.createElement("div");
+    foodInfo.className = "food-info";
+
+    const foodName = document.createElement("strong");
+    foodName.className = "text-sm";
+    foodName.textContent = food.name;
+
+    const foodCal = document.createElement("span");
+    foodCal.className = "text-xs text-muted";
+
+    const servingInfo = food.serving ? food.serving : "100g";
+    foodCal.textContent = `${food.calories} kcal / ${food.unit || "100g"}`;
+    foodInfo.append(foodName, foodCal);
+
+    const foodMacros = document.createElement("div");
+    foodMacros.className = "food-macros text-xs text-muted";
+    foodMacros.textContent = `P: ${food.protein}g | C: ${food.carbs}g | F: ${food.fat}g`;
+
+    itemDiv.append(foodInfo, foodMacros);
+    searchResults.appendChild(itemDiv);
+  });
 }
 
 function addFoodToMeal(foodId) {
@@ -90,7 +110,7 @@ function renderMealList(mealType) {
           <span class="text-sm font-medium">${food.name}</span>
           <small class="text-xs text-muted">${food.calories} kcal</small>
         </div>
-        <button class="btn-delete-food" data-meal="${mealType}" data-index="${index}">&times;</button>
+        <button class="btn-delete-food" data-meal="${mealType}" data-index="${index}" aria-label="Remove ${food.name} from ${mealType}">&times;</button>
       </li>
     `,
     )
@@ -120,14 +140,20 @@ foodSearchInput.addEventListener("input", (e) => {
   searchTimeout = setTimeout(async () => {
     if (query.trim().length >= 2) {
       console.log("A request is being sent to the API:", query);
-      const results = await searchFood(query);
-      renderSearchResults(results);
+
+      searchResults.innerHTML = `<p class="text-xs text-muted p-sm">Searching for foods...</p>`;
+
+      try {
+        const results = await searchFood(query);
+        renderSearchResults(results);
+      } catch (error) {
+        searchResults.innerHTML = `<p class="text-xs text-danger p-sm">Failed to fetch food items. Please check your connection and try again.</p>`;
+      }
     } else {
       searchResults.innerHTML = "";
     }
   }, 400);
 });
-
 
 searchResults.addEventListener("click", (e) => {
   const item = e.target.closest(".search-item");
@@ -148,5 +174,11 @@ document.addEventListener("click", (e) => {
     const mealType = e.target.getAttribute("data-meal");
     const index = parseInt(e.target.getAttribute("data-index"), 10);
     deleteFoodFromMeal(mealType, index);
+  }
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && !searchModal.classList.contains("hidden")) {
+    closeModal();
   }
 });

@@ -1,4 +1,6 @@
-function updateSummary() {
+import { appState } from "./calorie.js";
+
+export function updateSummary() {
   let totalCalories = 0;
   let totalProtein = 0;
   let totalCarbs = 0;

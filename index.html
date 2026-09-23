@@ -276,12 +276,13 @@
     </main>
 
     <div id="searchModal" class="modal-backdrop hidden">
-      <div class="modal-content">
+      <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
         <div class="modal-header">
           <h3 id="modalTitle">Add Food</h3>
-          <button id="btnCloseModal" class="btn-close">&times;</button>
+          <button id="btnCloseModal" class="btn-close" aria-label="Close modal">&times;</button>
         </div>
         <div class="modal-body">
+          <label for="foodSearchInput" class="visually-hidden">Search food</label>
           <input
             type="text"
             id="foodSearchInput"
@@ -293,10 +294,6 @@
       </div>
     </div>
 
-    <script src="./js/water.js"></script>
-    <script src="./js/snacksDatabase.js"></script>
-    <script src="./js/api.js"></script>
-    <script src="./js/summary.js"></script>
-    <script src="./js/calorie.js"></script>
+    <script type="module" src="./js/calorie.js"></script>
   </body>
 </html>

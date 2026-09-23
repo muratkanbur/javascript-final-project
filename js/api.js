@@ -1,18 +1,19 @@
+import { COMMON_SNACKS } from "./snacksDatabase.js";
+import { USDA_API_KEY } from "./config.js";
 
 
-const USDA_API_KEY = "cjWDeC4ZmU85Vu4E1OExA0qK24wApzaLa52ySa16";
-
-async function searchFood(query) {
+export async function searchFood(query) {
   if (!query || query.trim().length < 2) return [];
 
   const cleanQuery = query.toLowerCase().trim();
 
-  const matchedSnacks = COMMON_SNACKS.filter((snack) =>
-    snack.name.toLowerCase().includes(cleanQuery),
-  );
+  const matchedSnacks = (Array.isArray(COMMON_SNACKS) ? COMMON_SNACKS : [])
+    .filter((snack) => snack && snack.name && snack.name.toLowerCase().includes(cleanQuery))
+    .map((snack) => ({
+      ...snack,
+    unit: "1 serving", 
+  }));
 
-  // USDA FoodData Central Search Endpoint
-  // dataType: Foundation ve SR Legacy
   const url = `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${USDA_API_KEY}&query=${encodeURIComponent(
     cleanQuery,
   )}&dataType=Foundation,SR%20Legacy&pageSize=15`;
@@ -25,21 +26,20 @@ async function searchFood(query) {
     }
 
     const data = await response.json();
-    const rawFoods = data.foods || [];
 
-    const cleanProducts = rawFoods.map((food) => {
-      const nutrients = food.foodNutrients || [];
+    const rawFoods = Array.isArray(data?.foods) ? data.foods : [];
 
-      // USDA Nutrients ID Mapping:
-      // 1008 -> Energy (kcal)
-      // 1003 -> Protein (g)
-      // 1005 -> Carbohydrate (g)
-      // 1004 -> Total lipid/fat (g)
+    const cleanProducts = rawFoods
+      .filter((food) => food && food.fdcId != null && food.description)
+      .map((food) => {
+        const nutrients = Array.isArray(food.foodNutrients) ? food.foodNutrients : [];
 
-      const getNutrientVal = (id) => {
-        const item = nutrients.find((n) => n.nutrientId === id);
-        return item ? Math.round(item.value) : 0;
-      };
+        const getNutrientVal = (id) => {
+          const item = nutrients.find((n) => n && n.nutrientId === id);
+          return item && typeof item.value === "number" && !isNaN(item.value)
+            ? Math.round(item.value)
+            : 0;
+        };
 
       return {
         id: food.fdcId.toString(),
@@ -48,6 +48,7 @@ async function searchFood(query) {
         protein: getNutrientVal(1003),
         carbs: getNutrientVal(1005),
         fat: getNutrientVal(1004),
+        unit: "100g", 
       };
     });
 

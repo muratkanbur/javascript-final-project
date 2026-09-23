@@ -1,6 +1,7 @@
 // js/snacksDatabase.js
 
-const COMMON_SNACKS = [
+
+export const COMMON_SNACKS = [
   { id: "snack_1", name: "Potato Chips (1 bag - 50g)", calories: 268, protein: 3, carbs: 27, fat: 17 },
   { id: "snack_2", name: "Milk Chocolate Bar (50g)", calories: 267, protein: 4, carbs: 30, fat: 15 },
   { id: "snack_3", name: "Dark Chocolate 70% (50g)", calories: 290, protein: 4, carbs: 23, fat: 21 },

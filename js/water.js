@@ -27,7 +27,7 @@ const waterMessages = [
   "Consistency is the key to success! 🔥"
 ];
 
-function updateWaterUI() {
+export function updateWaterUI() {
   waterConsumed.innerText = totalConsumed.toFixed(2).replace(".00", "");
 
   const isTargetReached = totalConsumed >= TARGET_WATER;
